@@ -17,5 +17,19 @@ namespace NoteAppUI
         {
             InitializeComponent();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            Note note = new Note();
+            note.Titles = "Test note";
+            note.NoteCategory = NoteCategory.Sundry;
+            note.NoteText = "13456789 qwer екуц !№;";
+            note.Modified = DateTime.Now;
+
+            Project project = new Project();
+            project.Notes.Add(note);
+
+            ProjectManager.Save(project);
+        }
     }
 }

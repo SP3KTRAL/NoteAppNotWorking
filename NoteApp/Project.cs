@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace NoteApp
 {
@@ -14,13 +10,6 @@ namespace NoteApp
         /// <summary>
         /// Возвращает и задаёт заметки.
         /// </summary>
-        public List<Note> Notes { get; set; }
-        /// <summary>
-        /// Конструктор по умолчанию.
-        /// </summary>
-        public Project()
-        {
-            Notes = new List<Note>();
-        }
+        public List<Note> Notes { get; set; } = new List<Note>();
     }
 }

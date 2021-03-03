@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NoteApp;
 using System.Windows.Forms;
 
@@ -21,8 +14,8 @@ namespace NoteAppUI
         private void MainForm_Load(object sender, EventArgs e)
         {
             Note note = new Note();
-            note.Titles = "Test note";
-            note.NoteCategory = NoteCategory.Sundry;
+            note.Title = "Test note";
+            note.NoteCategory = NoteCategory.Other;
             note.NoteText = "13456789 qwer екуц !№;";
             note.Modified = DateTime.Now;
 

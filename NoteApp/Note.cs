@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NoteApp
 {
@@ -16,23 +12,26 @@ namespace NoteApp
         /// <summary>
         /// Название заметки.
         /// </summary>
-        private string _titles;
+        private string _title;
+
         /// <summary>
         /// Дата создания заметки.
         /// </summary>
-        private DateTime _creation;
+        private DateTime _created;
+
         /// <summary>
         /// Дата сохранения заметки.
         /// </summary>
         private DateTime _modified;
+
         /// <summary>
         /// Возвращает и задаёт название заметки.
         /// </summary>
-        public string Titles
+        public string Title
         {
             get
             {
-                return _titles;
+                return _title;
             }
             set
             {
@@ -48,31 +47,35 @@ namespace NoteApp
                                                 "не должно превышать 50 символов");
                 }
 
-                _titles = value;
+                _title = value;
             }
         }
+
         /// <summary>
         /// Возвращает и задаёт категорию заметки.
         /// </summary>
         public NoteCategory NoteCategory { get; set; }
+
         /// <summary>
         /// Возвращает и задаёт текст заметки.
         /// </summary>
         public string NoteText { get; set; }
+
         /// <summary>
         /// Возвращает время создания.
         /// </summary>
-        public DateTime Creation
+        public DateTime Created
         {
             get
             {
-                return _creation;
+                return _created;
             }
             private set
             {
-                _creation = value;
+                _created = value;
             }
         }
+
         /// <summary>
         /// Возвращает и задаёт время последнего изменения.
         /// </summary>
@@ -87,12 +90,13 @@ namespace NoteApp
                 _modified = value;
             }
         }
+
         /// <summary>
         /// Конструктор, задающий время создания.
         /// </summary>
         public Note()
         {
-            _creation = DateTime.Now;
+            _created = DateTime.Now;
         }
     }
 }

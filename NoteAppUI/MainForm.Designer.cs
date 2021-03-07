@@ -36,8 +36,9 @@ namespace NoteAppUI
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "NoteApp";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 

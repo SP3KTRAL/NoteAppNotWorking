@@ -38,7 +38,7 @@ namespace NoteApp
 
                 if (value.Length == 0)
                 {
-                    value = "Без названия";
+                    value = "Без названия " + DateTime.Now;
                 }
 
                 if (value.Length > 50)
@@ -55,26 +55,12 @@ namespace NoteApp
         /// Возвращает и задаёт категорию заметки.
         /// </summary>
         public NoteCategory NoteCategory { get; set; }
+        
 
         /// <summary>
         /// Возвращает и задаёт текст заметки.
         /// </summary>
         public string NoteText { get; set; }
-
-        /// <summary>
-        /// Возвращает время создания.
-        /// </summary>
-        public DateTime Created
-        {
-            get
-            {
-                return _created;
-            }
-            private set
-            {
-                _created = value;
-            }
-        }
 
         /// <summary>
         /// Возвращает и задаёт время последнего изменения.
@@ -88,6 +74,21 @@ namespace NoteApp
             set
             {
                 _modified = value;
+            }
+        }
+
+        /// <summary>
+        /// Возвращает время создания.
+        /// </summary>
+        public DateTime Created
+        {
+            get
+            {
+                return _created;
+            }
+            private set
+            {
+                _created = value;
             }
         }
 

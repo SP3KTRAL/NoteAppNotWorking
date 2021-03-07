@@ -5,12 +5,12 @@
     /// </summary>
     public enum NoteCategory
     {
-        Work,
+        Other,
         Home,
         HealthAndSports,
         People,
         Documents,
         Finance,
-        Other
-    }
+        Work
+}
 }

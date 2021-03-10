@@ -12,5 +12,5 @@
         Documents,
         Finance,
         Work
-}
+    }
 }

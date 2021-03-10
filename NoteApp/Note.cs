@@ -7,7 +7,7 @@ namespace NoteApp
     /// заметки, тексте заметки, дате создания и дате последнего
     /// изменения.
     /// </summary>
-    public class Note
+    public class Note : ICloneable
     {
         /// <summary>
         /// Название заметки.
@@ -29,10 +29,7 @@ namespace NoteApp
         /// </summary>
         public string Title
         {
-            get
-            {
-                return _title;
-            }
+            get { return _title; }
             set
             {
 
@@ -55,7 +52,6 @@ namespace NoteApp
         /// Возвращает и задаёт категорию заметки.
         /// </summary>
         public NoteCategory NoteCategory { get; set; }
-        
 
         /// <summary>
         /// Возвращает и задаёт текст заметки.
@@ -67,14 +63,8 @@ namespace NoteApp
         /// </summary>
         public DateTime Modified
         {
-            get
-            {
-                return _modified;
-            }
-            set
-            {
-                _modified = value;
-            }
+            get { return _modified; }
+            set { _modified = value; }
         }
 
         /// <summary>
@@ -82,14 +72,8 @@ namespace NoteApp
         /// </summary>
         public DateTime Created
         {
-            get
-            {
-                return _created;
-            }
-            private set
-            {
-                _created = value;
-            }
+            get { return _created; }
+            private set { _created = value; }
         }
 
         /// <summary>
@@ -98,6 +82,11 @@ namespace NoteApp
         public Note()
         {
             _created = DateTime.Now;
+        }
+
+        public object Clone()
+        {
+            return MemberwiseClone();
         }
     }
 }

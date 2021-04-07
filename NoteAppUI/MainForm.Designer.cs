@@ -35,7 +35,7 @@ namespace NoteAppUI
             this.removeNoteButton = new System.Windows.Forms.Button();
             this.editNoteButton = new System.Windows.Forms.Button();
             this.addNoteButton = new System.Windows.Forms.Button();
-            this.NoteCategoryComboBox = new System.Windows.Forms.ComboBox();
+            this.noteCategoryComboBox = new System.Windows.Forms.ComboBox();
             this.ShowCategoryLabel = new System.Windows.Forms.Label();
             this.textNoteRichTextBox = new System.Windows.Forms.RichTextBox();
             this.modifiedNoteLabel = new System.Windows.Forms.Label();
@@ -75,7 +75,7 @@ namespace NoteAppUI
             this.splitContainer1.Panel1.Controls.Add(this.removeNoteButton);
             this.splitContainer1.Panel1.Controls.Add(this.editNoteButton);
             this.splitContainer1.Panel1.Controls.Add(this.addNoteButton);
-            this.splitContainer1.Panel1.Controls.Add(this.NoteCategoryComboBox);
+            this.splitContainer1.Panel1.Controls.Add(this.noteCategoryComboBox);
             this.splitContainer1.Panel1.Controls.Add(this.ShowCategoryLabel);
             // 
             // splitContainer1.Panel2
@@ -102,6 +102,7 @@ namespace NoteAppUI
             this.titleNoteListBox.Name = "titleNoteListBox";
             this.titleNoteListBox.Size = new System.Drawing.Size(303, 524);
             this.titleNoteListBox.TabIndex = 7;
+            this.titleNoteListBox.SelectedIndexChanged += new System.EventHandler(this.titleNoteListBox_SelectedIndexChanged);
             // 
             // removeNoteButton
             // 
@@ -154,15 +155,17 @@ namespace NoteAppUI
             this.addNoteButton.UseVisualStyleBackColor = true;
             this.addNoteButton.Click += new System.EventHandler(this.addNoteButton_Click);
             // 
-            // NoteCategoryComboBox
+            // noteCategoryComboBox
             // 
-            this.NoteCategoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.noteCategoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NoteCategoryComboBox.FormattingEnabled = true;
-            this.NoteCategoryComboBox.Location = new System.Drawing.Point(97, 9);
-            this.NoteCategoryComboBox.Name = "NoteCategoryComboBox";
-            this.NoteCategoryComboBox.Size = new System.Drawing.Size(218, 21);
-            this.NoteCategoryComboBox.TabIndex = 1;
+            this.noteCategoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.noteCategoryComboBox.FormattingEnabled = true;
+            this.noteCategoryComboBox.Location = new System.Drawing.Point(97, 9);
+            this.noteCategoryComboBox.Name = "noteCategoryComboBox";
+            this.noteCategoryComboBox.Size = new System.Drawing.Size(218, 21);
+            this.noteCategoryComboBox.TabIndex = 1;
+            this.noteCategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.noteCategoryComboBox_SelectedIndexChanged);
             // 
             // ShowCategoryLabel
             // 
@@ -191,16 +194,15 @@ namespace NoteAppUI
             // modifiedNoteLabel
             // 
             this.modifiedNoteLabel.AutoSize = true;
-            this.modifiedNoteLabel.Location = new System.Drawing.Point(208, 59);
+            this.modifiedNoteLabel.Location = new System.Drawing.Point(231, 59);
             this.modifiedNoteLabel.Name = "modifiedNoteLabel";
-            this.modifiedNoteLabel.Size = new System.Drawing.Size(61, 13);
+            this.modifiedNoteLabel.Size = new System.Drawing.Size(0, 13);
             this.modifiedNoteLabel.TabIndex = 6;
-            this.modifiedNoteLabel.Text = "00.00.0000";
             // 
             // modifiedLabel
             // 
             this.modifiedLabel.AutoSize = true;
-            this.modifiedLabel.Location = new System.Drawing.Point(152, 59);
+            this.modifiedLabel.Location = new System.Drawing.Point(175, 59);
             this.modifiedLabel.Name = "modifiedLabel";
             this.modifiedLabel.Size = new System.Drawing.Size(50, 13);
             this.modifiedLabel.TabIndex = 5;
@@ -211,10 +213,8 @@ namespace NoteAppUI
             this.createdNoteLabel.AutoSize = true;
             this.createdNoteLabel.Location = new System.Drawing.Point(67, 59);
             this.createdNoteLabel.Name = "createdNoteLabel";
-            this.createdNoteLabel.Size = new System.Drawing.Size(61, 13);
+            this.createdNoteLabel.Size = new System.Drawing.Size(0, 13);
             this.createdNoteLabel.TabIndex = 4;
-            this.createdNoteLabel.Text = "00.00.0000";
-            this.createdNoteLabel.Click += new System.EventHandler(this.createdNoteLabel_Click);
             // 
             // createdLabel
             // 
@@ -230,10 +230,8 @@ namespace NoteAppUI
             this.catrgoryNoteLabel.AutoSize = true;
             this.catrgoryNoteLabel.Location = new System.Drawing.Point(65, 38);
             this.catrgoryNoteLabel.Name = "catrgoryNoteLabel";
-            this.catrgoryNoteLabel.Size = new System.Drawing.Size(31, 13);
+            this.catrgoryNoteLabel.Size = new System.Drawing.Size(0, 13);
             this.catrgoryNoteLabel.TabIndex = 2;
-            this.catrgoryNoteLabel.Text = "1111";
-            this.catrgoryNoteLabel.Click += new System.EventHandler(this.label1_Click);
             // 
             // categoryLabel
             // 
@@ -243,7 +241,6 @@ namespace NoteAppUI
             this.categoryLabel.Size = new System.Drawing.Size(52, 13);
             this.categoryLabel.TabIndex = 1;
             this.categoryLabel.Text = "Category:";
-            this.categoryLabel.Click += new System.EventHandler(this.categoryLabel_Click);
             // 
             // titleNoteLabel
             // 
@@ -251,9 +248,8 @@ namespace NoteAppUI
             this.titleNoteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.titleNoteLabel.Location = new System.Drawing.Point(12, 9);
             this.titleNoteLabel.Name = "titleNoteLabel";
-            this.titleNoteLabel.Size = new System.Drawing.Size(57, 25);
+            this.titleNoteLabel.Size = new System.Drawing.Size(0, 25);
             this.titleNoteLabel.TabIndex = 0;
-            this.titleNoteLabel.Text = "GGG";
             // 
             // menuStrip1
             // 
@@ -362,7 +358,7 @@ namespace NoteAppUI
         private System.Windows.Forms.ToolStripMenuItem removeNoteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ComboBox NoteCategoryComboBox;
+        private System.Windows.Forms.ComboBox noteCategoryComboBox;
         private System.Windows.Forms.Label ShowCategoryLabel;
         private System.Windows.Forms.Button addNoteButton;
         private System.Windows.Forms.Button editNoteButton;

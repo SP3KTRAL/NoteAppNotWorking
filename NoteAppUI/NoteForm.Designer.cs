@@ -38,7 +38,7 @@ namespace NoteAppUI
             this.createdNoteLabel = new System.Windows.Forms.Label();
             this.modifiedLabel = new System.Windows.Forms.Label();
             this.modifiedNoteLabel = new System.Windows.Forms.Label();
-            this.noteTextTextBox = new System.Windows.Forms.TextBox();
+            this.noteTextBox = new System.Windows.Forms.TextBox();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -60,6 +60,7 @@ namespace NoteAppUI
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(576, 20);
             this.titleTextBox.TabIndex = 1;
+            this.titleTextBox.Text = "Untitle";
             this.titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
             // 
             // categoryLabel
@@ -73,6 +74,8 @@ namespace NoteAppUI
             // 
             // categoryComboBox
             // 
+            this.categoryComboBox.BackColor = System.Drawing.SystemColors.Window;
+            this.categoryComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.categoryComboBox.FormattingEnabled = true;
             this.categoryComboBox.Location = new System.Drawing.Point(70, 35);
             this.categoryComboBox.Name = "categoryComboBox";
@@ -94,14 +97,13 @@ namespace NoteAppUI
             this.createdNoteLabel.AutoSize = true;
             this.createdNoteLabel.Location = new System.Drawing.Point(67, 67);
             this.createdNoteLabel.Name = "createdNoteLabel";
-            this.createdNoteLabel.Size = new System.Drawing.Size(61, 13);
+            this.createdNoteLabel.Size = new System.Drawing.Size(0, 13);
             this.createdNoteLabel.TabIndex = 5;
-            this.createdNoteLabel.Text = "00.00.0000";
             // 
             // modifiedLabel
             // 
             this.modifiedLabel.AutoSize = true;
-            this.modifiedLabel.Location = new System.Drawing.Point(156, 67);
+            this.modifiedLabel.Location = new System.Drawing.Point(181, 67);
             this.modifiedLabel.Name = "modifiedLabel";
             this.modifiedLabel.Size = new System.Drawing.Size(50, 13);
             this.modifiedLabel.TabIndex = 6;
@@ -110,23 +112,23 @@ namespace NoteAppUI
             // modifiedNoteLabel
             // 
             this.modifiedNoteLabel.AutoSize = true;
-            this.modifiedNoteLabel.Location = new System.Drawing.Point(221, 67);
+            this.modifiedNoteLabel.Location = new System.Drawing.Point(246, 67);
             this.modifiedNoteLabel.Name = "modifiedNoteLabel";
-            this.modifiedNoteLabel.Size = new System.Drawing.Size(61, 13);
+            this.modifiedNoteLabel.Size = new System.Drawing.Size(0, 13);
             this.modifiedNoteLabel.TabIndex = 7;
-            this.modifiedNoteLabel.Text = "00.00.0000";
             // 
-            // noteTextTextBox
+            // noteTextBox
             // 
-            this.noteTextTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.noteTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.noteTextTextBox.Location = new System.Drawing.Point(15, 93);
-            this.noteTextTextBox.Multiline = true;
-            this.noteTextTextBox.Name = "noteTextTextBox";
-            this.noteTextTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.noteTextTextBox.Size = new System.Drawing.Size(631, 461);
-            this.noteTextTextBox.TabIndex = 8;
+            this.noteTextBox.Location = new System.Drawing.Point(15, 93);
+            this.noteTextBox.Multiline = true;
+            this.noteTextBox.Name = "noteTextBox";
+            this.noteTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.noteTextBox.Size = new System.Drawing.Size(631, 461);
+            this.noteTextBox.TabIndex = 8;
+            this.noteTextBox.TextChanged += new System.EventHandler(this.noteTextBox_TextChanged);
             // 
             // okButton
             // 
@@ -148,6 +150,7 @@ namespace NoteAppUI
             this.cancelButton.TabIndex = 10;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // NoteForm
             // 
@@ -156,7 +159,7 @@ namespace NoteAppUI
             this.ClientSize = new System.Drawing.Size(658, 596);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
-            this.Controls.Add(this.noteTextTextBox);
+            this.Controls.Add(this.noteTextBox);
             this.Controls.Add(this.modifiedNoteLabel);
             this.Controls.Add(this.modifiedLabel);
             this.Controls.Add(this.createdNoteLabel);
@@ -184,7 +187,7 @@ namespace NoteAppUI
         private System.Windows.Forms.Label createdNoteLabel;
         private System.Windows.Forms.Label modifiedLabel;
         private System.Windows.Forms.Label modifiedNoteLabel;
-        private System.Windows.Forms.TextBox noteTextTextBox;
+        private System.Windows.Forms.TextBox noteTextBox;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
     }

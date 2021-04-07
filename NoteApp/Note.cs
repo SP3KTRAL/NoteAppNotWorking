@@ -15,6 +15,16 @@ namespace NoteApp
         private string _title;
 
         /// <summary>
+        /// Категория заметки.
+        /// </summary>
+        private NoteCategory _noteCategory;
+
+        /// <summary>
+        /// Текст заметки.
+        /// </summary>
+        private string _noteText;
+
+        /// <summary>
         /// Дата создания заметки.
         /// </summary>
         private DateTime _created;
@@ -35,28 +45,50 @@ namespace NoteApp
 
                 if (value.Length == 0)
                 {
-                    value = "Без названия " + DateTime.Now;
+                    value = "Без названия";
                 }
 
                 if (value.Length > 50)
                 {
-                    throw new ArgumentException("Название " +
-                                                "не должно превышать 50 символов");
+                    throw new ArgumentException($"The name should not exceed 50 characters, but it was: { value.Length }!");
                 }
 
                 _title = value;
+                _modified = DateTime.Now;
             }
         }
 
         /// <summary>
         /// Возвращает и задаёт категорию заметки.
         /// </summary>
-        public NoteCategory NoteCategory { get; set; }
+        public NoteCategory NoteCategory
+        {
+            get
+            {
+                return _noteCategory;
+            }
+            set
+            {
+                _noteCategory = value;
+                _modified = DateTime.Now;
+            }
+        }
 
         /// <summary>
         /// Возвращает и задаёт текст заметки.
         /// </summary>
-        public string NoteText { get; set; }
+        public string NoteText
+        {
+            get
+            {
+                return _noteText;
+            }
+            set
+            {
+                _noteText = value;
+                _modified = DateTime.Now;
+            }
+        }
 
         /// <summary>
         /// Возвращает и задаёт время последнего изменения.
@@ -81,6 +113,7 @@ namespace NoteApp
         /// </summary>
         public Note()
         {
+            _modified = DateTime.Now;
             _created = DateTime.Now;
         }
 

@@ -11,23 +11,24 @@ namespace NoteApp
     /// </summary>
     public static class ProjectManager
     {
-        public static string appdataFolder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        public static string path = $@"{appdataFolder}\Belov\NoteApp\";
+        public static readonly string DefaultPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Belov\NoteApp\";
+        public static readonly string FileName = "project.json";
 
         /// <summary>
         /// Cериализация. Метод, сохраняющий объект «Проект» в файл.
         /// </summary>
         /// <param name="project"></param>
-        public static void Save(Project project)
+        public static void Save(Project project, string path)
         {
-            DirectoryInfo directoryInfo = new DirectoryInfo(path);
+            string pathFolder = Path.GetDirectoryName(path);
+            DirectoryInfo directoryInfo = new DirectoryInfo(pathFolder);
             if (!directoryInfo.Exists)
             {
                 directoryInfo.Create();
             }
 
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamWriter sw = new StreamWriter(path + "notes.json"))
+            using (StreamWriter sw = new StreamWriter(path))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, project);
@@ -37,18 +38,39 @@ namespace NoteApp
         /// <summary>
         /// Десериализация. Метод, загружающий проект из файла.
         /// </summary>
-        public static Project Load(Project project)
+        public static Project Load(string path)
         {
+            Project project = new Project();
+
+            string pathFolder = Path.GetDirectoryName(path);
+            DirectoryInfo directoryInfo = new DirectoryInfo(pathFolder);
+            if (!directoryInfo.Exists)
+            {
+                return project;
+            }
+
+            if (!File.Exists(path))
+            {
+                return project;
+            }
+
             JsonSerializer serializer = new JsonSerializer();
-            using (StreamReader sr = new StreamReader(path + "notes.json"))
+            using (StreamReader sr = new StreamReader(path))
             using (JsonReader reader = new JsonTextReader(sr))
             {
-                project = (Project)serializer.Deserialize<Project>(reader);
+                try
+                {
+                    project = serializer.Deserialize<Project>(reader);
+                }
+                catch (Exception e)
+                {
+                    return project;
+                }
             }
 
             if (project == null)
             {
-                project = new Project();
+                return new Project();
             }
 
             return project;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using NoteApp;
 using System.Windows.Forms;
@@ -10,43 +11,29 @@ namespace NoteAppUI
         /// <summary>
         /// Список заметок
         /// </summary>
-        Project _project = new Project();
+        Project _project;
 
         /// <summary>
         /// Список заметок выбранной категории
         /// </summary>
-        Project _sortProject = new Project();
+        private List<Note> _displayedNotes = new List<Note>();
 
         public MainForm()
         {
             InitializeComponent();
 
-            var catygories = Enum.GetValues(typeof(NoteCategory)).Cast<NoteCategory>().ToList();
-            
-            foreach (var catygory in catygories)
-            {
-                noteCategoryComboBox.Items.Add(catygory);
-            }
-            noteCategoryComboBox.Items.Insert(0, "All");
-
-            noteCategoryComboBox.SelectedIndex = 0;
-
             string path = ProjectManager.DefaultPath + ProjectManager.FileName;
-
             _project = ProjectManager.Load(path);
 
-            foreach (var note in _project.Notes)
+            var categories = Enum.GetValues(typeof(NoteCategory)).Cast<NoteCategory>().ToList();
+            noteCategoryComboBox.Items.Add("All");
+            foreach (var category in categories)
             {
-                titleNoteListBox.Items.Add(note.Title);
-                _sortProject.Notes.Add(note);
+                noteCategoryComboBox.Items.Add(category);
             }
 
+            noteCategoryComboBox.SelectedIndex = 0;
             SelectFirstItem();
-        }
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            
         }
 
         /// <summary>
@@ -55,7 +42,6 @@ namespace NoteAppUI
         private void Save()
         {
             string path = ProjectManager.DefaultPath + ProjectManager.FileName;
-
             ProjectManager.Save(_project, path);
         }
 
@@ -75,10 +61,7 @@ namespace NoteAppUI
             }
 
             SelectFirstItem();
-
-            Save();
         }
-
 
         /// <summary>
         /// Изменяет заметку
@@ -91,14 +74,11 @@ namespace NoteAppUI
 
             if (noteForm.ShowDialog() == DialogResult.OK)
             {
-                Remove();
-
+                RemoveNote(titleNoteListBox.SelectedIndex);
                 AddNote(noteForm.Note);
             }
 
             SelectFirstItem();
-
-            Save();
         }
 
         /// <summary>
@@ -106,7 +86,7 @@ namespace NoteAppUI
         /// </summary>
         private void SelectFirstItem()
         {
-            if (_sortProject.Notes.Count != 0)
+            if (_displayedNotes.Count != 0)
             {
                 titleNoteListBox.SelectedIndex = 0;
             }
@@ -115,22 +95,21 @@ namespace NoteAppUI
         /// <summary>
         /// Удаляет заметку
         /// </summary>
-        private void Remove()
+        /// <param name="index">Индекс удаляемой заметка</param>
+        private void RemoveNote(int index)
         {
-            Note selectNote = _sortProject.Notes[titleNoteListBox.SelectedIndex];
-            int index = _project.Notes.IndexOf(selectNote);
+            Note selectNote = _displayedNotes[index];
+            int indexRem = _project.Notes.IndexOf(selectNote);
 
-            _project.Notes.RemoveAt(index);
-            _sortProject.Notes.RemoveAt(titleNoteListBox.SelectedIndex);
-            titleNoteListBox.Items.RemoveAt(titleNoteListBox.SelectedIndex);
-
-            Save();
+            _project.Notes.RemoveAt(indexRem);
+            _displayedNotes.RemoveAt(index);
+            titleNoteListBox.Items.RemoveAt(index);
         }
 
         /// <summary>
         /// Добавляет заметку в список
         /// </summary>
-        /// /// <param name="note">Добавляемая заметка</param>
+        /// <param name="note">Добавляемая заметка</param>
         private void AddNote(Note note)
         {
             _project.Notes.Insert(0, note);
@@ -138,59 +117,67 @@ namespace NoteAppUI
             if (noteCategoryComboBox.SelectedItem.ToString() == "All")
             {
                 titleNoteListBox.Items.Insert(0, note.Title);
-                _sortProject.Notes.Insert(0, note);
+                _displayedNotes.Insert(0, note);
             }
             else if ((NoteCategory)noteCategoryComboBox.SelectedItem == note.NoteCategory)
             {
                 titleNoteListBox.Items.Insert(0, note.Title);
-                _sortProject.Notes.Insert(0, note);
+                _displayedNotes.Insert(0, note);
+            }
+        }
+
+        /// <summary>
+        /// Проверка, выбрана ли заметка для редактирования
+        /// </summary>
+        private void CheckNote()
+        {
+            if (titleNoteListBox.SelectedIndex != -1)
+            {
+                EditNote(_displayedNotes[titleNoteListBox.SelectedIndex]);
+            }
+            else
+            {
+                MessageBox.Show(@"Select a note to edit!");
             }
         }
 
         private void removeNoteButton_Click(object sender, EventArgs e)
         {
-            Remove();
-
+            RemoveNote(titleNoteListBox.SelectedIndex);
             SelectFirstItem();
+            Save();
         }
 
         private void editNoteButton_Click(object sender, EventArgs e)
         {
-            if (titleNoteListBox.SelectedIndex != -1)
-            {
-                EditNote(_sortProject.Notes[titleNoteListBox.SelectedIndex]);
-            }
-            else
-            {
-                MessageBox.Show("Select a note to edit!");
-            }
+            CheckNote();
+            Save();
         }
 
         private void addNoteButton_Click(object sender, EventArgs e)
         {
             CreateNote();
+            Save();
         }
 
         private void noteCategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             titleNoteListBox.Items.Clear();
-
-            _sortProject.Notes.Clear();
+            _displayedNotes.Clear();
 
             foreach (var note in _project.Notes)
             {
                 if (noteCategoryComboBox.SelectedItem.ToString() == "All")
                 {
                     titleNoteListBox.Items.Add(note.Title);
-                    _sortProject.Notes.Add(note);
+                    _displayedNotes.Add(note);
                 }
                 else if (note.NoteCategory == (NoteCategory) noteCategoryComboBox.SelectedItem)
                 {
                     titleNoteListBox.Items.Add(note.Title);
-                    _sortProject.Notes.Add(note);
+                    _displayedNotes.Add(note);
                 }
             }
-
             SelectFirstItem();
         }
 
@@ -206,12 +193,44 @@ namespace NoteAppUI
             }
             else
             {
-                titleNoteLabel.Text = _sortProject.Notes[titleNoteListBox.SelectedIndex].Title;
-                catrgoryNoteLabel.Text = _sortProject.Notes[titleNoteListBox.SelectedIndex].NoteCategory.ToString();
-                createdNoteLabel.Text = _sortProject.Notes[titleNoteListBox.SelectedIndex].Created.ToLongDateString();
-                modifiedNoteLabel.Text = _sortProject.Notes[titleNoteListBox.SelectedIndex].Modified.ToLongDateString();
-                textNoteRichTextBox.Text = _sortProject.Notes[titleNoteListBox.SelectedIndex].NoteText;
+                var note = _displayedNotes[titleNoteListBox.SelectedIndex];
+                titleNoteLabel.Text = note.Title;
+                catrgoryNoteLabel.Text = note.NoteCategory.ToString();
+                createdNoteLabel.Text = note.Created.ToLongDateString();
+                modifiedNoteLabel.Text = note.Modified.ToLongDateString();
+                textNoteRichTextBox.Text = note.NoteText;
             }
+        }
+
+        private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CreateNote();
+            Save();
+        }
+
+        private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveNote(titleNoteListBox.SelectedIndex);
+            SelectFirstItem();
+            Save();
+        }
+
+        private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheckNote();
+            Save();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Save();
+            Close();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            About about = new About();
+            about.Show();
         }
     }
 }

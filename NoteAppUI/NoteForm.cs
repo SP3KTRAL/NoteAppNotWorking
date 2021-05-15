@@ -14,6 +14,11 @@ namespace NoteAppUI
     public partial class NoteForm : Form
     {
         /// <summary>
+        /// хранит информацию о добавленной/изменённой заметки
+        /// </summary>
+        private Note _note;
+
+        /// <summary>
         /// перекрашивает название в зависимости от наличия ошибки
         /// </summary>
         private string _errorText = string.Empty;
@@ -22,18 +27,12 @@ namespace NoteAppUI
         {
             InitializeComponent();
 
-            var catygories = Enum.GetValues(typeof(NoteCategory)).Cast<NoteCategory>().ToList();
-
-            foreach (var catygory in catygories)
+            var categories = Enum.GetValues(typeof(NoteCategory)).Cast<NoteCategory>().ToList();
+            foreach (var category in categories)
             {
-                categoryComboBox.Items.Add(catygory);
+                categoryComboBox.Items.Add(category);
             }
         }
-
-        /// <summary>
-        /// хранит информацию о добавленной/изменённой заметки
-        /// </summary>
-        private Note _note;
 
         public Note Note
         {
@@ -71,9 +70,9 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// перекрашивает название в зависимости от наличия ошибки
+        /// Перекрашивает название в зависимости от наличия ошибки
         /// </summary>
-        private void SearchError()
+        private void RepaintTitleField()
         {
             if (_errorText == string.Empty)
             {
@@ -81,7 +80,7 @@ namespace NoteAppUI
             }
             else
             {
-                titleTextBox.BackColor = Color.Red;
+                titleTextBox.BackColor = Color.MistyRose;
             }
         }
 
@@ -96,7 +95,7 @@ namespace NoteAppUI
             {
                 _errorText = exception.Message;
             }
-            SearchError();
+            RepaintTitleField();
         }
 
         private void categoryComboBox_SelectedIndexChanged(object sender, EventArgs e)

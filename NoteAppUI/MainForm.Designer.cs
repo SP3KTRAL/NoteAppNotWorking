@@ -98,6 +98,7 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.titleNoteListBox.FormattingEnabled = true;
+            this.titleNoteListBox.IntegralHeight = false;
             this.titleNoteListBox.Location = new System.Drawing.Point(12, 36);
             this.titleNoteListBox.Name = "titleNoteListBox";
             this.titleNoteListBox.Size = new System.Drawing.Size(303, 524);
@@ -183,18 +184,18 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textNoteRichTextBox.BackColor = System.Drawing.Color.White;
             this.textNoteRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textNoteRichTextBox.Location = new System.Drawing.Point(17, 86);
+            this.textNoteRichTextBox.Location = new System.Drawing.Point(6, 86);
             this.textNoteRichTextBox.Name = "textNoteRichTextBox";
             this.textNoteRichTextBox.ReadOnly = true;
             this.textNoteRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.textNoteRichTextBox.Size = new System.Drawing.Size(614, 509);
+            this.textNoteRichTextBox.Size = new System.Drawing.Size(625, 509);
             this.textNoteRichTextBox.TabIndex = 7;
             this.textNoteRichTextBox.Text = "";
             // 
             // modifiedNoteLabel
             // 
             this.modifiedNoteLabel.AutoSize = true;
-            this.modifiedNoteLabel.Location = new System.Drawing.Point(231, 59);
+            this.modifiedNoteLabel.Location = new System.Drawing.Point(224, 59);
             this.modifiedNoteLabel.Name = "modifiedNoteLabel";
             this.modifiedNoteLabel.Size = new System.Drawing.Size(0, 13);
             this.modifiedNoteLabel.TabIndex = 6;
@@ -202,7 +203,7 @@ namespace NoteAppUI
             // modifiedLabel
             // 
             this.modifiedLabel.AutoSize = true;
-            this.modifiedLabel.Location = new System.Drawing.Point(175, 59);
+            this.modifiedLabel.Location = new System.Drawing.Point(168, 59);
             this.modifiedLabel.Name = "modifiedLabel";
             this.modifiedLabel.Size = new System.Drawing.Size(50, 13);
             this.modifiedLabel.TabIndex = 5;
@@ -211,7 +212,7 @@ namespace NoteAppUI
             // createdNoteLabel
             // 
             this.createdNoteLabel.AutoSize = true;
-            this.createdNoteLabel.Location = new System.Drawing.Point(67, 59);
+            this.createdNoteLabel.Location = new System.Drawing.Point(54, 59);
             this.createdNoteLabel.Name = "createdNoteLabel";
             this.createdNoteLabel.Size = new System.Drawing.Size(0, 13);
             this.createdNoteLabel.TabIndex = 4;
@@ -219,7 +220,7 @@ namespace NoteAppUI
             // createdLabel
             // 
             this.createdLabel.AutoSize = true;
-            this.createdLabel.Location = new System.Drawing.Point(14, 59);
+            this.createdLabel.Location = new System.Drawing.Point(3, 59);
             this.createdLabel.Name = "createdLabel";
             this.createdLabel.Size = new System.Drawing.Size(47, 13);
             this.createdLabel.TabIndex = 3;
@@ -228,7 +229,7 @@ namespace NoteAppUI
             // catrgoryNoteLabel
             // 
             this.catrgoryNoteLabel.AutoSize = true;
-            this.catrgoryNoteLabel.Location = new System.Drawing.Point(65, 38);
+            this.catrgoryNoteLabel.Location = new System.Drawing.Point(60, 38);
             this.catrgoryNoteLabel.Name = "catrgoryNoteLabel";
             this.catrgoryNoteLabel.Size = new System.Drawing.Size(0, 13);
             this.catrgoryNoteLabel.TabIndex = 2;
@@ -236,7 +237,7 @@ namespace NoteAppUI
             // categoryLabel
             // 
             this.categoryLabel.AutoSize = true;
-            this.categoryLabel.Location = new System.Drawing.Point(14, 38);
+            this.categoryLabel.Location = new System.Drawing.Point(3, 38);
             this.categoryLabel.Name = "categoryLabel";
             this.categoryLabel.Size = new System.Drawing.Size(52, 13);
             this.categoryLabel.TabIndex = 1;
@@ -246,7 +247,7 @@ namespace NoteAppUI
             // 
             this.titleNoteLabel.AutoSize = true;
             this.titleNoteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.titleNoteLabel.Location = new System.Drawing.Point(12, 9);
+            this.titleNoteLabel.Location = new System.Drawing.Point(-1, 9);
             this.titleNoteLabel.Name = "titleNoteLabel";
             this.titleNoteLabel.Size = new System.Drawing.Size(0, 25);
             this.titleNoteLabel.TabIndex = 0;
@@ -276,6 +277,7 @@ namespace NoteAppUI
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -290,20 +292,23 @@ namespace NoteAppUI
             // addNoteToolStripMenuItem
             // 
             this.addNoteToolStripMenuItem.Name = "addNoteToolStripMenuItem";
-            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.addNoteToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.addNoteToolStripMenuItem.Text = "Add Note";
+            this.addNoteToolStripMenuItem.Click += new System.EventHandler(this.addNoteToolStripMenuItem_Click);
             // 
             // editNoteToolStripMenuItem
             // 
             this.editNoteToolStripMenuItem.Name = "editNoteToolStripMenuItem";
-            this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.editNoteToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.editNoteToolStripMenuItem.Text = "Edit Note";
+            this.editNoteToolStripMenuItem.Click += new System.EventHandler(this.editNoteToolStripMenuItem_Click);
             // 
             // removeNoteToolStripMenuItem
             // 
             this.removeNoteToolStripMenuItem.Name = "removeNoteToolStripMenuItem";
-            this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
-            this.removeNoteToolStripMenuItem.Text = "Remove Note";
+            this.removeNoteToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.removeNoteToolStripMenuItem.Text = "RemoveNote Note";
+            this.removeNoteToolStripMenuItem.Click += new System.EventHandler(this.removeNoteToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -318,6 +323,7 @@ namespace NoteAppUI
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -332,7 +338,6 @@ namespace NoteAppUI
             this.MinimumSize = new System.Drawing.Size(986, 673);
             this.Name = "MainForm";
             this.Text = "NoteApp";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

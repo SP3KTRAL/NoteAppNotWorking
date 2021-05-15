@@ -1,4 +1,5 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace NoteApp
 {
@@ -42,10 +43,9 @@ namespace NoteApp
             get { return _title; }
             set
             {
-
                 if (value.Length == 0)
                 {
-                    value = "Без названия";
+                    value = "Untitle";
                 }
 
                 if (value.Length > 50)
@@ -91,15 +91,6 @@ namespace NoteApp
         }
 
         /// <summary>
-        /// Возвращает и задаёт время последнего изменения.
-        /// </summary>
-        public DateTime Modified
-        {
-            get { return _modified; }
-            set { _modified = value; }
-        }
-
-        /// <summary>
         /// Возвращает время создания.
         /// </summary>
         public DateTime Created
@@ -109,12 +100,31 @@ namespace NoteApp
         }
 
         /// <summary>
+        /// Возвращает и задаёт время последнего изменения.
+        /// </summary>
+        public DateTime Modified
+        {
+            get { return _modified; }
+            set { _modified = value; }
+        }
+
+        /// <summary>
         /// Конструктор, задающий время создания.
         /// </summary>
         public Note()
         {
-            _modified = DateTime.Now;
             _created = DateTime.Now;
+            _modified = DateTime.Now;
+        }
+
+        [JsonConstructor]
+        private Note(string title, NoteCategory noteCategory, string noteText, DateTime created, DateTime modified)
+        {
+            _title = title;
+            _noteCategory = noteCategory;
+            _noteText = noteText;
+            _created = created;
+            _modified = modified;
         }
 
         public object Clone()

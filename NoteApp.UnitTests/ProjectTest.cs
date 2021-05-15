@@ -5,7 +5,7 @@ namespace NoteApp.UnitTests
     [TestFixture]
     public class ProjectTest
     {
-        [Test(Description = "Позитивный тест геттера Title")]
+        [Test(Description = "Позитивный тест Project")]
         public void TestProject_CorrectValue()
         {
             var expected = new Note();

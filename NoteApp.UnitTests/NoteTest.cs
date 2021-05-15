@@ -44,44 +44,24 @@ namespace NoteApp.UnitTests
                 "Должно возникать исключение, если название длиннее 50 символов");
         }
 
-        [Test(Description = "Позитивный тест геттера NoteCategory")]
+        [Test(Description = "Позитивный тест NoteCategory")]
         public void TestNoteCategoryGet_CorrectValue()
         {
             var expected = NoteCategory.Other;
             _note.NoteCategory = expected;
             var actual = _note.NoteCategory;
 
-            Assert.AreEqual(expected, actual, "Геттер NoteCategory возвращает неправильную категорию");
+            Assert.AreEqual(expected, actual, "NoteCategory возвращает неправильную категорию");
         }
 
-        [Test(Description = "Присвоение категории NoteCategory")]
-        public void TestNoteCategorySet_CorrectValue()
-        {
-            var expected = NoteCategory.Other;
-            _note.NoteCategory = expected;
-            var actual = _note.NoteCategory;
-
-            Assert.AreEqual(expected, actual, "Сеттер NoteCategory заполняет неправильную категорию");
-        }
-
-        [Test(Description = "Позитивный тест геттера NoteText")]
+        [Test(Description = "Позитивный тест NoteText")]
         public void TestNoteTextGet_CorrectValue()
         {
             var expected = "Параграф №16, задачи №16.2, 16.3(а,б).";
             _note.NoteText = expected;
             var actual = _note.NoteText;
 
-            Assert.AreEqual(expected, actual, "Геттер NoteText возвращает неправильный текст");
-        }
-
-        [Test(Description = "Присвоение категории NoteText")]
-        public void TestNoteTextSet_CorrectValue()
-        {
-            var expected = "Параграф №16, задачи №16.2, 16.3(а,б).";
-            _note.NoteText = expected;
-            var actual = _note.NoteText;
-
-            Assert.AreEqual(expected, actual, "Сеттер NoteText заполняет неправильный текст");
+            Assert.AreEqual(expected, actual, "NoteText возвращает неправильный текст");
         }
 
         [Test(Description = "Позитивный тест геттера Created")]

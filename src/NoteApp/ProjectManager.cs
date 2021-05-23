@@ -64,7 +64,7 @@ namespace NoteApp
                 }
                 catch (Exception e)
                 {
-                    return project;
+                    return new Project();
                 }
             }
 

@@ -11,7 +11,7 @@ namespace NoteApp
     public class Note : ICloneable, IEquatable<Note>
     {
         /// <summary>
-        /// Название заметки.
+        /// Название заметки
         /// </summary>
         private string _title;
 
